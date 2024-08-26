@@ -1,0 +1,621 @@
+rank,pl,name,count,pc
+superkingdom,D,Bacteria,35286,99.63012112827172
+superkingdom,C,Bacteria,24656,99.5799676898223
+superkingdom,A,Bacteria,20532,99.57322987390883
+superkingdom,B,Bacteria,26435,99.56310496779783
+kingdom,D,Metazoa,126,98.4375
+subphylum,D,Craniata,123,98.4
+kingdom,B,Metazoa,113,98.26086956521739
+subphylum,B,Craniata,110,98.21428571428571
+kingdom,C,Metazoa,99,98.01980198019803
+subphylum,C,Craniata,96,97.95918367346938
+kingdom,A,Metazoa,85,97.70114942528735
+subphylum,A,Craniata,82,97.61904761904762
+strain,B,Bacteroides thetaiotaomicron VPI-5482,87,73.72881355932203
+strain,A,Bacteroides thetaiotaomicron VPI-5482,61,70.93023255813954
+genus,A,Bacteroides,7645,70.57791728212703
+genus,B,Bacteroides,10182,70.4295496991077
+family,A,Bacteroidaceae,8965,70.35787160571338
+genus,C,Bacteroides,8867,70.12257809410835
+family,B,Bacteroidaceae,11832,69.99940838904337
+family,C,Bacteroidaceae,10371,69.84308707657081
+genus,D,Bacteroides,13053,69.10005293806246
+family,D,Bacteroidaceae,15137,68.73580964490056
+order,A,Bacteroidales,11064,68.30472897888629
+order,B,Bacteroidales,14448,68.0482290881688
+strain,C,Bacteroides thetaiotaomicron VPI-5482,68,68.0
+order,C,Bacteroidales,12830,67.86205437427272
+class,A,Bacteroidia,11209,67.73218925614842
+class,B,Bacteroidia,14611,67.45302617607682
+class,C,Bacteroidia,13000,67.23906072204406
+order,D,Bacteroidales,18431,66.9341952353283
+strain,D,Bacteroides thetaiotaomicron VPI-5482,107,66.45962732919256
+class,D,Bacteroidia,18647,66.29101638878026
+phylum,A,Bacteroidota,11688,66.07122668174111
+phylum,B,Bacteroidota,15181,65.8326105810928
+species,A,Bacteroides thetaiotaomicron,2212,65.6964656964657
+phylum,C,Bacteroidota,13625,65.63734463821177
+species,B,Bacteroides thetaiotaomicron,3047,65.28819370044997
+phylum,D,Bacteroidota,19470,64.68223647054914
+species,C,Bacteroides thetaiotaomicron,2582,64.18095948297291
+species,D,Bacteroides thetaiotaomicron,3968,62.507876496534344
+phylum,D,Bacillota,9371,31.131856084515462
+phylum,C,Bacillota,6341,30.54725888813951
+phylum,B,Bacillota,6983,30.28187337380746
+phylum,A,Bacillota,5352,30.2543810062182
+species,D,Thomasclavelia ramosa,1706,26.874606175173284
+species,C,Thomasclavelia ramosa,1065,26.472781506338556
+species,A,Thomasclavelia ramosa,857,25.452925452925452
+species,B,Thomasclavelia ramosa,1186,25.412470537818727
+lca,C,root,8099,24.647737301804682
+lca,D,root,10513,22.889179185717396
+lca,B,Bacteroides,7135,22.788246566592143
+lca,A,Bacteroides,5433,22.166462668298653
+order,A,Eubacteriales,3371,20.81121126064946
+order,D,Eubacteriales,5728,20.801859384079023
+order,C,Eubacteriales,3919,20.7288691420713
+order,B,Eubacteriales,4379,20.624529012810854
+class,A,Clostridia,3394,20.508792072028523
+class,D,Clostridia,5763,20.487752852927585
+class,C,Clostridia,3948,20.41998551774077
+class,B,Clostridia,4403,20.32685471584876
+lca,D,Bacteroides,9085,19.780100152405836
+strain,D,Thomasclavelia ramosa DSM 1402,31,19.25465838509317
+lca,C,Bacteroides,6285,19.127179768100063
+family,D,Lachnospiraceae,4056,18.417945690672962
+family,A,Lachnospiraceae,2327,18.262439177523152
+family,B,Lachnospiraceae,3083,18.23936579305449
+family,C,Lachnospiraceae,2695,18.149370327968214
+strain,C,Thomasclavelia ramosa DSM 1402,18,18.0
+strain,A,Thomasclavelia ramosa DSM 1402,15,17.441860465116278
+lca,A,root,3890,15.87107303141575
+lca,B,root,4759,15.199616735867135
+strain,B,Thomasclavelia ramosa DSM 1402,17,14.40677966101695
+genus,A,Blautia,1550,14.309453471196454
+genus,C,Blautia,1765,13.958086200079084
+genus,B,Blautia,2007,13.882548246524177
+genus,D,Blautia,2567,13.589200635256748
+lca,C,Bacteria,3997,12.164095072887186
+lca,A,Bacteria,2926,11.937984496124031
+lca,D,Bacteria,5311,11.563248421510995
+lca,B,Bacteria,3487,11.137016927499202
+genus,D,Thomasclavelia,2087,11.048173636844892
+genus,C,Thomasclavelia,1328,10.502174772637405
+genus,B,Thomasclavelia,1473,10.188835858061838
+family,D,Coprobacillaceae,2210,10.035419126328216
+genus,A,Thomasclavelia,1081,9.979689807976367
+family,C,Coprobacillaceae,1428,9.616809212741599
+order,D,Erysipelotrichales,2619,9.511185357350378
+lca,B,Bacteroides thetaiotaomicron,2960,9.453848610667519
+family,B,Coprobacillaceae,1575,9.317872566999942
+class,D,Erysipelotrichia,2619,9.3106758149952
+family,A,Coprobacillaceae,1164,9.135143619525978
+order,C,Erysipelotrichales,1712,9.05532635142283
+class,C,Erysipelotrichia,1712,8.854867073549189
+order,B,Erysipelotrichales,1879,8.849849284099474
+lca,A,Bacteroides thetaiotaomicron,2151,8.776009791921664
+class,B,Erysipelotrichia,1879,8.674576427681085
+order,A,Erysipelotrichales,1398,8.63069514754908
+lca,A,Bacteroidales,2099,8.563851489188085
+class,A,Erysipelotrichia,1398,8.44764034080609
+species,D,Anaerostipes caccae,534,8.412098298676748
+lca,D,Bacteroides thetaiotaomicron,3861,8.406270411495754
+lca,B,Bacteroidales,2616,8.355158096454806
+strain,C,Anaerostipes caccae L1-92,8,8.0
+species,B,Anaerostipes caccae,368,7.885151060638526
+species,C,Anaerostipes caccae,311,7.730549341287595
+lca,C,Bacteroides thetaiotaomicron,2514,7.650871907240026
+lca,C,Bacteroidales,2459,7.4834900636051
+species,A,Anaerostipes caccae,251,7.454707454707455
+lca,D,Bacteroidales,3294,7.171783148269105
+strain,A,Anaerostipes caccae L1-92,6,6.976744186046512
+strain,D,Anaerostipes caccae L1-92,11,6.832298136645963
+lca,B,Blautia,1973,6.301501117853721
+lca,A,Blautia,1525,6.2219502243982046
+strain,B,Anaerostipes caccae L1-92,7,5.932203389830509
+genus,D,Anaerostipes,1068,5.653785071466384
+lca,D,Blautia,2492,5.425647724798607
+lca,A,Bacteroidaceae,1320,5.385556915544676
+lca,B,Bacteroidaceae,1650,5.269881826892367
+lca,C,Blautia,1728,5.258833196384552
+genus,B,Anaerostipes,744,5.14629591201494
+strain,B,Escherichia coli K-12,6,5.084745762711865
+genus,C,Anaerostipes,634,5.013839462238039
+genus,A,Anaerostipes,519,4.791358936484491
+lca,C,Bacteroidaceae,1504,4.577132596853222
+lca,D,Bacteroidaceae,2084,4.537339429566732
+strain,D,Escherichia coli K-12,7,4.3478260869565215
+lca,A,Eubacteriales,1041,4.247246022031824
+lca,B,Eubacteriales,1291,4.123283296071543
+lca,B,Thomasclavelia ramosa,1169,3.733631427658895
+lca,C,Eubacteriales,1217,3.7037037037037033
+lca,D,Thomasclavelia ramosa,1675,3.646853908121054
+lca,D,Eubacteriales,1649,3.5902460265621596
+phylum,D,Pseudomonadota,1066,3.541410584365968
+strain,A,Escherichia coli K-12,3,3.488372093023256
+lca,A,Thomasclavelia ramosa,842,3.435332517339861
+class,D,Gammaproteobacteria,916,3.2564257527818268
+phylum,B,Pseudomonadota,750,3.2523850823937557
+lca,C,Thomasclavelia ramosa,1047,3.1863416415593897
+phylum,C,Pseudomonadota,661,3.1843144811638884
+phylum,A,Pseudomonadota,543,3.069530808366309
+class,B,Gammaproteobacteria,650,3.0007848206453995
+strain,C,Escherichia coli K-12,3,3.0
+class,C,Gammaproteobacteria,566,2.9274852591289955
+class,A,Gammaproteobacteria,465,2.809837452414043
+order,D,Enterobacterales,627,2.2770191748983146
+lca,A,Bacillota,558,2.2766217870257037
+family,D,Enterobacteriaceae,497,2.256834075015893
+lca,B,Bacillota,699,2.232513573938039
+family,B,Enterobacteriaceae,362,2.141631663018399
+order,B,Enterobacterales,452,2.1288620949510175
+lca,D,Bacillota,967,2.105377748748095
+lca,C,Bacillota,676,2.0572750235856234
+family,C,Enterobacteriaceae,301,2.0270725301367096
+order,C,Enterobacterales,376,1.9887866285835185
+family,A,Enterobacteriaceae,250,1.9620153822005966
+lca,A,Bacteroidota,479,1.9543043655650756
+order,A,Enterobacterales,312,1.9261637239165328
+lca,C,Bacteroidota,625,1.9020664049423295
+lca,B,Bacteroidota,570,1.8205046311082722
+lca,D,Bacteroidota,823,1.7918571739603744
+strain,D,Clostridium butyricum E4 str. BoNT E BL5262,2,1.2422360248447204
+lca,B,Anaerostipes,376,1.2008942829766847
+subphylum,A,Pezizomycotina,1,1.1904761904761905
+subphylum,A,Streptophytina,1,1.1904761904761905
+species,D,Blautia pseudococcoides,75,1.1814744801512287
+strain,A,Escherichia coli DH1,1,1.1627906976744187
+lca,D,Anaerostipes,534,1.16263879817113
+lca,B,Anaerostipes caccae,361,1.1529862663685724
+kingdom,A,Viridiplantae,1,1.1494252873563218
+kingdom,A,Fungi,1,1.1494252873563218
+lca,D,Anaerostipes caccae,523,1.1386893098192903
+lca,B,Enterobacteriaceae,343,1.0954966464388376
+lca,A,Anaerostipes,268,1.0934312525499796
+lca,B,Lachnospiraceae,332,1.0603641009262217
+lca,A,Lachnospiraceae,258,1.0526315789473684
+lca,D,Enterobacteriaceae,472,1.027650772915306
+subphylum,C,Pezizomycotina,1,1.0204081632653061
+subphylum,C,Streptophytina,1,1.0204081632653061
+strain,C,Lactiplantibacillus plantarum WCFS1,1,1.0
+strain,C,Bifidobacterium longum NCC2705,1,1.0
+strain,C,Escherichia coli DH1,1,1.0
+lca,A,Anaerostipes caccae,245,0.9995920032639738
+kingdom,C,Viridiplantae,1,0.9900990099009901
+kingdom,C,Fungi,1,0.9900990099009901
+lca,C,Anaerostipes,323,0.9829879180741957
+lca,A,Enterobacteriaceae,238,0.9710322317421461
+lca,B,Erysipelotrichales,304,0.9709358032577451
+lca,A,Erysipelotrichales,234,0.9547123623011016
+lca,C,Anaerostipes caccae,303,0.9221217931160413
+species,C,Blautia pseudococcoides,37,0.9197116579666915
+lca,B,Thomasclavelia,287,0.9166400511018844
+lca,D,Lachnospiraceae,420,0.9144350097975179
+lca,A,Thomasclavelia,224,0.9139126886984905
+lca,C,Lachnospiraceae,295,0.8977753431327794
+subphylum,B,Streptophytina,1,0.8928571428571428
+subphylum,B,Pezizomycotina,1,0.8928571428571428
+lca,D,Erysipelotrichales,409,0.8904855214456782
+lca,C,Enterobacteriaceae,288,0.8764721993974254
+kingdom,B,Fungi,1,0.8695652173913043
+kingdom,B,Viridiplantae,1,0.8695652173913043
+lca,C,Erysipelotrichales,284,0.8642989744057944
+strain,B,Escherichia coli DH1,1,0.847457627118644
+lca,D,Thomasclavelia,381,0.8295231874591771
+lca,C,Thomasclavelia,263,0.8003895431997322
+subphylum,D,Pezizomycotina,1,0.8
+subphylum,D,Streptophytina,1,0.8
+kingdom,D,Viridiplantae,1,0.78125
+kingdom,D,Fungi,1,0.78125
+species,A,Blautia pseudococcoides,25,0.7425007425007425
+species,B,Blautia pseudococcoides,34,0.7285193914720377
+lca,B,Gammaproteobacteria,198,0.6323858192270839
+lca,D,Gammaproteobacteria,287,0.6248639233616373
+lca,A,Gammaproteobacteria,153,0.6242350061199511
+strain,D,Bifidobacterium longum NCC2705,1,0.6211180124223602
+strain,D,Escherichia coli DH1,1,0.6211180124223602
+strain,D,Lactiplantibacillus plantarum WCFS1,1,0.6211180124223602
+lca,A,Bacteroidia,145,0.5915952672378622
+lca,C,Gammaproteobacteria,190,0.5782281871024681
+lca,B,Bacteroidia,163,0.5206004471414883
+lca,C,Bacteroidia,170,0.5173620621443136
+phylum,B,Chordata,110,0.47701647875108416
+lca,D,Bacteroidia,216,0.47028086218158066
+phylum,A,Chordata,82,0.4635387224420576
+phylum,C,Chordata,96,0.46247229983620775
+superkingdom,B,Eukaryota,116,0.43689503220217696
+superkingdom,A,Eukaryota,88,0.42677012609117365
+superkingdom,C,Eukaryota,104,0.420032310177706
+phylum,D,Chordata,123,0.40862429819607315
+superkingdom,D,Eukaryota,131,0.3698788717282661
+class,B,Mammalia,80,0.36932736254097226
+species,D,Escherichia coli,23,0.36231884057971014
+class,C,Mammalia,68,0.35171200993069207
+species,B,Escherichia coli,16,0.3428326548103707
+lca,A,Coprobacillaceae,83,0.33863729090167277
+class,A,Mammalia,56,0.33838902652728264
+lca,B,Coprobacillaceae,102,0.32577451293516446
+lca,D,Pseudomonadota,149,0.32440670585673853
+class,D,Mammalia,90,0.3199544953606598
+lca,B,Pseudomonadota,100,0.31938677738741617
+lca,A,Pseudomonadota,78,0.3182374541003672
+lca,C,Coprobacillaceae,100,0.30433062479077266
+lca,C,Pseudomonadota,95,0.2891140935512341
+lca,B,Enterobacterales,90,0.28744809964867457
+species,D,Clostridium butyricum,18,0.28355387523629494
+lca,D,Enterobacterales,130,0.28303940779446984
+lca,B,Bacteroides thetaiotaomicron VPI-5482,87,0.27786649632705207
+species,C,Escherichia coli,11,0.2734277902063137
+lca,D,Coprobacillaceae,123,0.2677988242978446
+species,A,Escherichia coli,9,0.2673002673002673
+family,D,Bifidobacteriaceae,57,0.2588320770138952
+lca,A,Enterobacterales,62,0.25295797633618927
+lca,A,Bacteroides thetaiotaomicron VPI-5482,61,0.24887800897592818
+class,D,Actinomycetes,66,0.2346332965978172
+lca,D,Bacteroides thetaiotaomicron VPI-5482,107,0.23296320487698674
+lca,C,Enterobacterales,75,0.22824796859307953
+phylum,D,Actinomycetota,66,0.2192618185442344
+genus,D,Bifidobacterium,40,0.21175224986765487
+order,D,Bifidobacteriales,57,0.2070017431725741
+lca,C,Bacteroides thetaiotaomicron VPI-5482,68,0.20694482485772545
+order,B,Primates,38,0.17897513187641298
+family,C,Bifidobacteriaceae,26,0.17509596605832042
+family,B,Bifidobacteriaceae,29,0.1715671774241259
+order,A,Primates,27,0.16668724533893073
+order,C,Primates,31,0.16396911033534328
+lca,D,Blautia pseudococcoides,75,0.16329196603527107
+species,D,Bifidobacterium longum,10,0.1575299306868305
+class,C,Actinomycetes,30,0.15516706320471707
+order,D,Primates,42,0.152527600232423
+class,B,Actinomycetes,33,0.15234753704815104
+family,A,Bifidobacteriaceae,19,0.1491131690472453
+phylum,C,Actinomycetota,30,0.14452259369881493
+phylum,B,Actinomycetota,33,0.14310494362532525
+genus,C,Bifidobacterium,18,0.1423487544483986
+order,C,Bifidobacteriales,26,0.13752247963609435
+order,B,Bifidobacteriales,29,0.136586284853052
+class,A,Actinomycetes,22,0.13293854613571815
+genus,B,Bifidobacterium,19,0.13142422355952135
+genus,A,Bifidobacterium,14,0.1292466765140325
+genus,D,Escherichia,24,0.1270513499205929
+genus,B,Escherichia,18,0.12450715916165178
+phylum,A,Actinomycetota,22,0.12436404748445451
+species,C,Clostridium butyricum,5,0.12428535918468804
+genus,D,Clostridium,23,0.12175754367390154
+order,A,Bifidobacteriales,19,0.11729843190517349
+lca,C,Blautia pseudococcoides,37,0.11260233117258589
+lca,B,Mammalia,35,0.11178537208559565
+lca,B,Blautia pseudococcoides,34,0.10859150431172149
+species,B,Clostridium butyricum,5,0.10713520462824085
+family,D,Clostridiaceae,23,0.10444101353192263
+lca,A,Blautia pseudococcoides,25,0.10199918400652795
+genus,A,Escherichia,11,0.10155096011816839
+lca,A,Mammalia,24,0.09791921664626684
+lca,C,Mammalia,32,0.09738579993304726
+family,D,Lactobacillaceae,21,0.09535918626827718
+genus,C,Escherichia,12,0.09489916963226572
+lca,A,Clostridia,23,0.09383924928600572
+species,A,Clostridium butyricum,3,0.0891000891000891
+species,A,Homo sapiens,3,0.0891000891000891
+lca,C,Clostridia,29,0.08825588118932408
+lca,D,Mammalia,40,0.08708904855214457
+class,D,Bacilli,22,0.07821109886593908
+lca,B,Clostridia,24,0.07665282657297988
+order,D,Lactobacillales,21,0.0762638001162115
+lca,D,Clostridia,35,0.07620291748312649
+species,C,Bifidobacterium longum,3,0.07457121551081282
+species,C,Homo sapiens,3,0.07457121551081282
+genus,D,Lactiplantibacillus,14,0.07411328745367919
+lca,D,Thomasclavelia ramosa DSM 1402,31,0.06749401262791203
+lca,D,Bifidobacterium,30,0.06531678641410843
+lca,A,Sarcopterygii,16,0.06527947776417788
+species,B,Homo sapiens,3,0.0642811227769445
+species,B,Bifidobacterium longum,3,0.0642811227769445
+species,D,Lactiplantibacillus plantarum,4,0.0630119722747322
+lca,A,Thomasclavelia ramosa DSM 1402,15,0.06119951040391676
+family,C,Hominidae,9,0.060610142097110915
+species,A,Bifidobacterium longum,2,0.05940005940005939
+family,B,Hominidae,10,0.05916109566349169
+lca,B,Sarcopterygii,18,0.05748961992973491
+lca,B,Simiiformes,18,0.05748961992973491
+genus,C,Clostridium,7,0.055357848952155
+family,A,Hominidae,7,0.054936430701616704
+lca,C,Thomasclavelia ramosa DSM 1402,18,0.054779512462339086
+lca,B,Thomasclavelia ramosa DSM 1402,17,0.054295752155860744
+lca,C,Sarcopterygii,17,0.05173620621443136
+lca,B,Bifidobacterium,16,0.05110188438198659
+lca,A,Simiiformes,12,0.04895960832313342
+lca,A,Bifidobacterium,12,0.04895960832313342
+lca,D,Simiiformes,22,0.04789897670367951
+species,D,Homo sapiens,3,0.04725897920604915
+family,C,Clostridiaceae,7,0.047141221631086264
+lca,C,Bifidobacterium,15,0.045649593718615905
+family,D,Hominidae,10,0.04540913631822723
+lca,D,Sarcopterygii,20,0.043544524276072284
+lca,C,Simiiformes,14,0.04260628747070818
+lca,A,Craniata,10,0.04079967360261118
+lca,B,Craniata,12,0.03832641328648994
+lca,D,Bifidobacteriaceae,17,0.037012845634661444
+lca,D,Clostridium butyricum,16,0.034835619420857826
+genus,B,Clostridium,5,0.03458532198934772
+family,C,Lactobacillaceae,5,0.03367230116506162
+lca,C,Craniata,11,0.033476368726985
+lca,D,Escherichia coli,15,0.032658393207054215
+lca,B,Bifidobacteriaceae,10,0.031938677738741615
+genus,C,Lactiplantibacillus,4,0.03163305654408857
+species,A,Streptomyces viridochromogenes,1,0.029700029700029697
+species,A,Selaginella moellendorffii,1,0.029700029700029697
+species,A,Lactiplantibacillus plantarum,1,0.029700029700029697
+species,A,Klebsiella variicola,1,0.029700029700029697
+species,A,Exophiala mesophila,1,0.029700029700029697
+family,B,Clostridiaceae,5,0.029580547831745845
+lca,B,Escherichia coli,9,0.028744809964867456
+lca,D,Craniata,13,0.028303940779446986
+genus,A,Homo,3,0.027695716395864108
+genus,A,Clostridium,3,0.027695716395864108
+order,C,Lactobacillales,5,0.026446630699248914
+class,C,Bacilli,5,0.02586117720078618
+species,C,Selaginella moellendorffii,1,0.024857071836937607
+species,C,Theileria orientalis,1,0.024857071836937607
+species,C,Exophiala mesophila,1,0.024857071836937607
+species,C,Streptomyces viridochromogenes,1,0.024857071836937607
+species,C,Klebsiella variicola,1,0.024857071836937607
+species,C,Lactiplantibacillus plantarum,1,0.024857071836937607
+lca,A,Anaerostipes caccae L1-92,6,0.02447980416156671
+lca,C,Anaerostipes caccae L1-92,8,0.024346449983261815
+lca,C,Bifidobacteriaceae,8,0.024346449983261815
+lca,D,Anaerostipes caccae L1-92,11,0.023949488351839757
+genus,C,Homo,3,0.02372479240806643
+family,A,Clostridiaceae,3,0.023544184586407158
+lca,B,Anaerostipes caccae L1-92,7,0.022357074417119132
+lca,D,Lactiplantibacillus,10,0.021772262138036142
+species,B,Lactiplantibacillus plantarum,1,0.021427040925648167
+species,B,Exophiala mesophila,1,0.021427040925648167
+species,B,Selaginella moellendorffii,1,0.021427040925648167
+species,B,Klebsiella variicola,1,0.021427040925648167
+species,B,Streptomyces viridochromogenes,1,0.021427040925648167
+lca,C,Escherichia coli,7,0.02130314373535409
+genus,B,Homo,3,0.020751193193608634
+lca,A,Escherichia coli,5,0.02039983680130559
+lca,A,Bifidobacteriaceae,5,0.02039983680130559
+lca,D,Bifidobacterium longum,9,0.019595035924232528
+lca,B,Escherichia coli K-12,6,0.01916320664324497
+lca,B,Euarchontoglires,6,0.01916320664324497
+genus,A,Lactiplantibacillus,2,0.01846381093057607
+lca,A,Euarchontoglires,4,0.01631986944104447
+lca,B,Clostridium butyricum,5,0.015969338869370808
+lca,B,Hominoidea,5,0.015969338869370808
+genus,D,Homo,3,0.01588141874007411
+species,D,Klebsiella variicola,1,0.01575299306868305
+species,D,Exophiala mesophila,1,0.01575299306868305
+species,D,Streptomyces viridochromogenes,1,0.01575299306868305
+species,D,Pseudomonas extremaustralis,1,0.01575299306868305
+species,D,Theileria orientalis,1,0.01575299306868305
+species,D,Selaginella moellendorffii,1,0.01575299306868305
+species,D,Xanthomonas citri,1,0.01575299306868305
+family,A,Lactobacillaceae,2,0.01569612305760477
+lca,D,Escherichia coli K-12,7,0.0152405834966253
+lca,D,Actinomycetes,7,0.0152405834966253
+lca,D,Euarchontoglires,7,0.0152405834966253
+lca,C,Clostridium butyricum,5,0.015216531239538634
+genus,B,Lactiplantibacillus,2,0.013834128795739089
+lca,D,Lactobacillaceae,6,0.013063357282821686
+lca,B,Homininae,4,0.012775471095496647
+order,A,Lactobacillales,2,0.012347203358439314
+lca,A,Primates,3,0.012239902080783354
+lca,A,Clostridium butyricum,3,0.012239902080783354
+lca,A,Escherichia coli K-12,3,0.012239902080783354
+lca,A,Metazoa,3,0.012239902080783354
+lca,A,Homininae,3,0.012239902080783354
+lca,A,Hominoidea,3,0.012239902080783354
+lca,A,Homo sapiens,3,0.012239902080783354
+lca,C,Homininae,4,0.012173224991630907
+lca,C,Euarchontoglires,4,0.012173224991630907
+class,A,Bacilli,2,0.01208532237597438
+family,B,Lactobacillaceae,2,0.011832219132698338
+lca,D,Hominoidea,5,0.010886131069018071
+lca,D,Clostridium,5,0.010886131069018071
+lca,B,Hominidae,3,0.009581603321622485
+lca,B,Primates,3,0.009581603321622485
+lca,B,Metazoa,3,0.009581603321622485
+lca,B,Bifidobacterium longum,3,0.009581603321622485
+lca,B,Actinomycetes,3,0.009581603321622485
+lca,B,Homo sapiens,3,0.009581603321622485
+order,B,Lactobacillales,2,0.009419743782969104
+class,B,Bacilli,2,0.009233184063524306
+genus,A,Exophiala,1,0.009231905465288036
+genus,A,Streptomyces,1,0.009231905465288036
+genus,A,Selaginella,1,0.009231905465288036
+genus,A,Klebsiella,1,0.009231905465288036
+lca,C,Metazoa,3,0.009129918743723181
+lca,C,Escherichia coli K-12,3,0.009129918743723181
+lca,C,Hominoidea,3,0.009129918743723181
+lca,C,Homo sapiens,3,0.009129918743723181
+lca,C,Lactiplantibacillus,3,0.009129918743723181
+lca,C,Primates,3,0.009129918743723181
+lca,C,Actinomycetes,3,0.009129918743723181
+lca,D,Homininae,4,0.008708904855214456
+lca,A,Actinomycetes,2,0.008159934720522235
+lca,A,Haplorrhini,2,0.008159934720522235
+lca,A,Escherichia,2,0.008159934720522235
+lca,A,Bifidobacterium longum,2,0.008159934720522235
+genus,C,Enterocloster,1,0.007908264136022143
+genus,C,Exophiala,1,0.007908264136022143
+genus,C,Theileria,1,0.007908264136022143
+genus,C,Streptomyces,1,0.007908264136022143
+genus,C,Selaginella,1,0.007908264136022143
+genus,C,Lactobacillus,1,0.007908264136022143
+genus,C,Klebsiella,1,0.007908264136022143
+family,A,Bovidae,1,0.007848061528802385
+family,A,Acholeplasmataceae,1,0.007848061528802385
+family,A,Herpotrichiellaceae,1,0.007848061528802385
+family,A,Selaginellaceae,1,0.007848061528802385
+family,A,Streptomycetaceae,1,0.007848061528802385
+genus,B,Streptomyces,1,0.006917064397869544
+genus,B,Selaginella,1,0.006917064397869544
+genus,B,Klebsiella,1,0.006917064397869544
+genus,B,Exophiala,1,0.006917064397869544
+family,C,Bovidae,1,0.006734460233012323
+family,C,Acholeplasmataceae,1,0.006734460233012323
+family,C,Planctomycetaceae,1,0.006734460233012323
+family,C,Herpotrichiellaceae,1,0.006734460233012323
+family,C,Selaginellaceae,1,0.006734460233012323
+family,C,Streptomycetaceae,1,0.006734460233012323
+family,C,Theileriidae,1,0.006734460233012323
+lca,D,Primates,3,0.006531678641410843
+lca,D,Metazoa,3,0.006531678641410843
+lca,D,Homo sapiens,3,0.006531678641410843
+lca,D,Hominidae,3,0.006531678641410843
+lca,D,Lactiplantibacillus plantarum,3,0.006531678641410843
+lca,B,Escherichia,2,0.0063877355477483235
+lca,B,Haplorrhini,2,0.0063877355477483235
+order,A,Selaginellales,1,0.006173601679219657
+order,A,Kitasatosporales,1,0.006173601679219657
+order,A,Chaetothyriales,1,0.006173601679219657
+order,A,Artiodactyla,1,0.006173601679219657
+order,A,Acholeplasmatales,1,0.006173601679219657
+lca,C,Haplorrhini,2,0.006086612495815454
+lca,C,Eukaryota,2,0.006086612495815454
+lca,C,Bifidobacterium longum,2,0.006086612495815454
+lca,C,Hominidae,2,0.006086612495815454
+lca,C,Clostridium,2,0.006086612495815454
+class,A,Lycopodiopsida,1,0.00604266118798719
+class,A,Mollicutes,1,0.00604266118798719
+class,A,Eurotiomycetes,1,0.00604266118798719
+family,B,Streptomycetaceae,1,0.005916109566349169
+family,B,Herpotrichiellaceae,1,0.005916109566349169
+family,B,Selaginellaceae,1,0.005916109566349169
+family,B,Bovidae,1,0.005916109566349169
+family,B,Acholeplasmataceae,1,0.005916109566349169
+phylum,A,Streptophyta,1,0.005652911249293386
+phylum,A,Ascomycota,1,0.005652911249293386
+phylum,A,Mycoplasmatota,1,0.005652911249293386
+genus,D,Variovorax,1,0.005293806246691371
+genus,D,Streptomyces,1,0.005293806246691371
+genus,D,Mycobacterium,1,0.005293806246691371
+genus,D,Lactobacillus,1,0.005293806246691371
+genus,D,Klebsiella,1,0.005293806246691371
+genus,D,Exophiala,1,0.005293806246691371
+genus,D,Theileria,1,0.005293806246691371
+genus,D,Selaginella,1,0.005293806246691371
+genus,D,Pseudomonas,1,0.005293806246691371
+genus,D,Xanthomonas,1,0.005293806246691371
+genus,D,Enterocloster,1,0.005293806246691371
+order,C,Planctomycetales,1,0.005289326139849783
+order,C,Piroplasmida,1,0.005289326139849783
+order,C,Selaginellales,1,0.005289326139849783
+order,C,Kitasatosporales,1,0.005289326139849783
+order,C,Acholeplasmatales,1,0.005289326139849783
+order,C,Artiodactyla,1,0.005289326139849783
+order,C,Chaetothyriales,1,0.005289326139849783
+class,C,Eurotiomycetes,1,0.005172235440157236
+class,C,Planctomycetia,1,0.005172235440157236
+class,C,Lycopodiopsida,1,0.005172235440157236
+class,C,Aconoidasida,1,0.005172235440157236
+class,C,Mollicutes,1,0.005172235440157236
+phylum,C,Apicomplexa,1,0.004817419789960497
+phylum,C,Ascomycota,1,0.004817419789960497
+phylum,C,Streptophyta,1,0.004817419789960497
+phylum,C,Mycoplasmatota,1,0.004817419789960497
+phylum,C,Planctomycetota,1,0.004817419789960497
+order,B,Acholeplasmatales,1,0.004709871891484552
+order,B,Chaetothyriales,1,0.004709871891484552
+order,B,Artiodactyla,1,0.004709871891484552
+order,B,Selaginellales,1,0.004709871891484552
+order,B,Kitasatosporales,1,0.004709871891484552
+class,B,Mollicutes,1,0.004616592031762153
+class,B,Eurotiomycetes,1,0.004616592031762153
+class,B,Lycopodiopsida,1,0.004616592031762153
+family,D,Pseudomonadaceae,1,0.004540913631822722
+family,D,Acholeplasmataceae,1,0.004540913631822722
+family,D,Bovidae,1,0.004540913631822722
+family,D,Planctomycetaceae,1,0.004540913631822722
+family,D,Mycobacteriaceae,1,0.004540913631822722
+family,D,Comamonadaceae,1,0.004540913631822722
+family,D,Herpotrichiellaceae,1,0.004540913631822722
+family,D,Theileriidae,1,0.004540913631822722
+family,D,Streptomycetaceae,1,0.004540913631822722
+family,D,Lysobacteraceae,1,0.004540913631822722
+family,D,Selaginellaceae,1,0.004540913631822722
+lca,D,Clostridium butyricum E4 str. BoNT E BL5262,2,0.004354452427607228
+lca,D,Haplorrhini,2,0.004354452427607228
+lca,D,Eukaryota,2,0.004354452427607228
+phylum,B,Ascomycota,1,0.004336513443191674
+phylum,B,Streptophyta,1,0.004336513443191674
+phylum,B,Mycoplasmatota,1,0.004336513443191674
+lca,A,Streptomyces viridochromogenes,1,0.004079967360261117
+lca,A,Escherichia coli DH1,1,0.004079967360261117
+lca,A,Lactiplantibacillus plantarum,1,0.004079967360261117
+lca,A,Klebsiella variicola,1,0.004079967360261117
+lca,A,Acholeplasmataceae,1,0.004079967360261117
+lca,A,Bovinae,1,0.004079967360261117
+lca,A,Selaginella moellendorffii,1,0.004079967360261117
+lca,A,Eukaryota,1,0.004079967360261117
+lca,A,Exophiala mesophila,1,0.004079967360261117
+lca,A,Hominidae,1,0.004079967360261117
+lca,A,Lactiplantibacillus,1,0.004079967360261117
+order,D,Chaetothyriales,1,0.0036316095293434047
+order,D,Kitasatosporales,1,0.0036316095293434047
+order,D,Lysobacterales,1,0.0036316095293434047
+order,D,Planctomycetales,1,0.0036316095293434047
+order,D,Mycobacteriales,1,0.0036316095293434047
+order,D,Selaginellales,1,0.0036316095293434047
+order,D,Artiodactyla,1,0.0036316095293434047
+order,D,Acholeplasmatales,1,0.0036316095293434047
+order,D,Pseudomonadales,1,0.0036316095293434047
+order,D,Piroplasmida,1,0.0036316095293434047
+order,D,Burkholderiales,1,0.0036316095293434047
+class,D,Planctomycetia,1,0.0035550499484517757
+class,D,Mollicutes,1,0.0035550499484517757
+class,D,Eurotiomycetes,1,0.0035550499484517757
+class,D,Aconoidasida,1,0.0035550499484517757
+class,D,Lycopodiopsida,1,0.0035550499484517757
+class,D,Betaproteobacteria,1,0.0035550499484517757
+phylum,D,Streptophyta,1,0.0033221487658217333
+phylum,D,Planctomycetota,1,0.0033221487658217333
+phylum,D,Mycoplasmatota,1,0.0033221487658217333
+phylum,D,Ascomycota,1,0.0033221487658217333
+phylum,D,Apicomplexa,1,0.0033221487658217333
+lca,B,Exophiala mesophila,1,0.0031938677738741618
+lca,B,Klebsiella variicola,1,0.0031938677738741618
+lca,B,Lactiplantibacillus,1,0.0031938677738741618
+lca,B,Lactiplantibacillus plantarum,1,0.0031938677738741618
+lca,B,Escherichia coli DH1,1,0.0031938677738741618
+lca,B,Eukaryota,1,0.0031938677738741618
+lca,B,Streptomyces viridochromogenes,1,0.0031938677738741618
+lca,B,Bovinae,1,0.0031938677738741618
+lca,B,Acholeplasmataceae,1,0.0031938677738741618
+lca,B,Selaginella moellendorffii,1,0.0031938677738741618
+lca,C,Planctomycetaceae,1,0.003043306247907727
+lca,C,Bifidobacterium longum NCC2705,1,0.003043306247907727
+lca,C,Acholeplasmataceae,1,0.003043306247907727
+lca,C,Escherichia,1,0.003043306247907727
+lca,C,Streptomyces viridochromogenes,1,0.003043306247907727
+lca,C,Lactobacillus,1,0.003043306247907727
+lca,C,Lactiplantibacillus plantarum WCFS1,1,0.003043306247907727
+lca,C,Theileria orientalis,1,0.003043306247907727
+lca,C,Klebsiella variicola,1,0.003043306247907727
+lca,C,Selaginella moellendorffii,1,0.003043306247907727
+lca,C,Escherichia coli DH1,1,0.003043306247907727
+lca,C,Exophiala mesophila,1,0.003043306247907727
+lca,C,Bovinae,1,0.003043306247907727
+lca,C,Enterocloster,1,0.003043306247907727
+lca,D,Lactobacillus,1,0.002177226213803614
+lca,D,Escherichia coli DH1,1,0.002177226213803614
+lca,D,Xanthomonas citri,1,0.002177226213803614
+lca,D,Theileria orientalis,1,0.002177226213803614
+lca,D,Streptomyces viridochromogenes,1,0.002177226213803614
+lca,D,Selaginella moellendorffii,1,0.002177226213803614
+lca,D,Pseudomonas extremaustralis,1,0.002177226213803614
+lca,D,Exophiala mesophila,1,0.002177226213803614
+lca,D,Lactiplantibacillus plantarum WCFS1,1,0.002177226213803614
+lca,D,Planctomycetaceae,1,0.002177226213803614
+lca,D,Escherichia,1,0.002177226213803614
+lca,D,Mycobacterium,1,0.002177226213803614
+lca,D,Acholeplasmataceae,1,0.002177226213803614
+lca,D,Bacilli,1,0.002177226213803614
+lca,D,Enterocloster,1,0.002177226213803614
+lca,D,Bifidobacterium longum NCC2705,1,0.002177226213803614
+lca,D,Bovinae,1,0.002177226213803614
+lca,D,Variovorax,1,0.002177226213803614
+lca,D,Klebsiella variicola,1,0.002177226213803614
