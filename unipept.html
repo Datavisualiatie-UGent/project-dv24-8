@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      .tooltip-item {
+        display: flex;
+        align-items: center;
+        margin-top: 5px;
+      }
+
+      .tooltip-color {
+        width: 8px;
+        height: 8px;
+        margin-right: 5px;
+      }
+
+      .tooltip {
+        position: absolute;
+        background-color: rgb(186, 34, 34);
+        border: 1px solid #ccc;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        font-size: 12px;
+        color: #333;
+        visibility: hidden;
+      }
+      .flexcontainer {
+        background-color: #ffffff;
+        display: flex; 
+        flex-wrap: wrap;
+        border-radius: 10px; 
+        padding: 10px;
+        margin-left: 40px;
+        margin-bottom: 4px;
+        margin-right: 40px;
+        margin-top: 4px;
+        opacity: 0.8;
+        border-color: #131d01;
+        border-width: 0px;
+        width: 100%;
+        border-style: solid;
+        align-content: center;
+      }
+
+      .flexcolumn {
+        background-color: #c0c0c0; 
+        display: flex; 
+        flex-wrap: wrap;
+        border-radius: 10px; 
+        padding: 10px;
+        padding-top: 10px ;
+        margin-left: 4px;
+        margin-bottom: 4px;
+        margin-right: 4px;
+        margin-top: 4px;
+      }  
+    </style>
+
+    <title>CAMPI3 datavisualisatie</title>
+
+    <script type="text/javascript" src="./d3.v5.js"></script>
+    <link rel="stylesheet" href="jl.css">
+    <link href="./node_modules/nouislider/dist/nouislider.css" rel="stylesheet">
+    <script src="./node_modules/nouislider/dist/nouislider.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js" charset="utf-8"></script>
+
+  </head>
+
+  <body>
+    <header>
+      <a href="#"><img src="" alt="" width="20%" height="90" id="Insert_logo" style="background-color: #C6D580; display:block;" /></a>
+    </header>
+
+    <div class="container">
+      <div class="sidebar1">
+        <ul class="nav">
+          <li><a href="./index.html">Infopagina</a></li>
+          <li><a href="./upset.html">UpSet plots</a></li>
+          <li><a href="./barplot_nr_of_mpsms.html">Barplots # mPSMs</a></li>
+          <li><a href="./compare_msamanda.html">Comparison MSAmanda</a></li>
+          <li><a href="./compare_ms2rescore.html">Comparison MS²Rescore</a></li>
+          <li><a href="./tda.html">TDA: Histogram & PP plots</a></li>
+          <!-- <li><a href="./histogram.html">TDA: distributies</a></li>   
+          <li><a href="./pp_plots.html">TDA: PP plots</a></li> -->
+          <!-- <li><a href="./taxonomic_distribution.html">Taxonomic distribution</a></li>
+          <li><a href="./sample_composition_charts_v3.html">sample composition</a></li>             
+          <li><a href="#">MS²Rescore fts PCA</a></li>
+          <li><a href="#">MS²Rescore fts boxplots</a></li> -->
+        </ul>
+        <aside>
+          <p> The above links demonstrate a basic navigational structure using an unordered list styled with CSS. Use this as a starting point and modify the properties to produce your own unique look. If you require flyout menus, create your own using a Spry menu, a menu widget from Adobe's Exchange or a variety of other javascript or CSS solutions.</p>
+          <p>If you would like the navigation along the top, simply move the ul to the top of the page and recreate the styling.</p>
+        </aside>
+      </div>
+
+        <article class="content">
+   
+
+          <section>
+            <h2>Sample composition</h2>
+
+            <div id="horizontal_barcharts">
+              <form>
+                <div style="padding-left: 20px;">
+                  <label>
+                    <i>Taxonomic level: &nbsp;</i>
+                    <select name="taxonomic_level" id="taxonomic_level">
+                      <option value="phylum">Phylum</option>
+                      <option value="class">Class</option>
+                      <option value="order">Order</option>
+                      <option value="family">Family</option>
+                      <option value="genus">Genus</option>
+                      <option value="species">Species</option>
+                      <option value="lca">LCA</option>
+                    </select>
+                    <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                  </label>
+            
+                  <label>
+                    <i>q-value threshold: &nbsp;</i>
+                    <select name="threshold" id="threshold">
+                      <option value="0.001">0.1 %</option>
+                      <option value="0.01">1 %</option>
+                      <option value="0.05">5 %</option>
+                    </select>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </label>
+            
+                  <input type="checkbox" id="filter" name="filter" value="True">
+                  <label for="filter"> <i>Remove unidentified peptides</i></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="checkbox" id="charmeRT" name="second_searches" value="True">
+                  <label for="charmeRT"> <i>Search for chimeric spectra</i></label><br>
+                </div>
+              </form>
+            
+              <div id="myDiv" style="margin-top: 20px; padding-left: 80px;"></div>
+            </div>
+
+          </section>
+
+
+        </article>
+
+
+        <aside>
+          <h4>Backgrounds</h4>
+          <p>By nature, the background color on any block element will only show for the length of the content. If you'd like a dividing line instead of a color, place a border on the side of the .content block (but only if it will always contain more content).</p>
+        </aside>
+
+        <footer>
+          <p> </p>
+          <address>
+             
+          </address>
+        </footer>
+        </div>
+
+        <script>
+          function countOccurrences(arr) {
+            const counts = {};
+
+            for (const element of arr) {
+                if (counts[element]) {
+                    counts[element]++;
+                } else {
+                    counts[element] = 1;
+                }
+            }
+
+            // Return the counts object
+            return counts;
+          }
+
+
+          async function fetchCSV(url) {
+              const response = await fetch(url);
+              const text = await response.text();
+              return text;
+            }
+
+
+            let taxonomicLevelSelect = document.getElementById('taxonomic_level').value;
+
+
+            // Event listener for input change
+            async function handleInputChange(event) {
+              const inputElement = event.target;
+              const inputValue = inputElement.value;
+
+              switch (inputElement.id) {
+                case 'taxonomic_level':
+                  taxonomicLevelSelect = inputValue;
+                  break;
+              }
+
+              try {
+                // const csvData = await fetchCSV(`./data/percentages_unipept.csv`);
+                const csvData = await fetchCSV(`./data/percentages_S11_unipept_no_unknown.csv`);
+
+                // Parse the main CSV data
+                const rows = csvData.trim().split('\n').map(row => row.split(','));
+                const headers = rows[0];
+                const data = rows.slice(1).map(row => {
+                  const obj = {};
+                  headers.forEach((header, i) => {
+                    obj[header] = row[i];
+                  });
+                  return obj;
+                });
+
+                console.log('taxonomic rank:', taxonomicLevelSelect);
+
+                var filteredData = data
+                  .filter(d => d.rank == taxonomicLevelSelect)
+
+
+                let categories = [], pipelines = [];
+
+
+                filter_out = ['unknown'];
+                // filter_out = ['unknown', 'Thomasclavelia ramosa','Bacteroides thetaiotaomicron','Anaerostipes caccae']
+
+
+                filteredData.forEach(d => {
+                  // if (d.name !== 'unknown') {
+                  if (!filter_out.includes(d.name)) {
+                    categories.push(d.name);
+                  }
+                  pipelines.push(d.pl);
+                })
+
+                categories = Array.from(new Set(categories))
+                yAxis = new Set(pipelines);
+
+                console.log(categories)
+                console.log(yAxis)
+
+                //thesisgeval:
+
+                yAxis = ['D','C','B','A']
+                // yAxis = ['ABCD']
+                // const colors = [...d3.schemeSet2, ...d3.schemeCategory10]
+                const colors = ['#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3', '#a6d854', '#ffd92f', '#e5c494', '#b3b3b3', '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
+                // const colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', '#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999']
+                console.log(colors)
+
+                let traces = [], category = '';
+
+
+                for (let i=0; i<categories.length; i++) {
+
+                  let category = categories[i]
+                  // console.log(category)
+
+                  let lalala = [];
+                  barData = filteredData
+                    .filter(d => d.name == category);
+                  console.log(barData)
+                  barData.forEach((d) => {
+                    lalala.push(d.pl);
+                  })
+                  counts = countOccurrences(lalala)
+
+                  let xValues = [], catData = [];
+
+                  
+
+                  yAxis.forEach(pl => {
+                    xValues.push(barData.filter(d => d.pl == pl).map(d => d.pc)[0]||0);
+                    catData.push(pl);
+                  })
+
+                  // console.log(counts, xValues, catData, category)
+                  
+                  // console.log(i, colors)
+
+                  traces.push({
+                    x: xValues,
+                    y: ['MS²Rescore w chimeric spectra', 'MS²Rescore w/o chimeric spectra', 'MSAmanda w chimeric spectra', 'MSAmanda w/o chimeric spectra'],
+                    // y: ['1','2','3','4','5','6','7','8','9','10','11','12','13'],
+                    name: `${category}`,
+                    orientation: 'h',
+                    type: 'bar',
+                    marker: {
+                      color: colors[i]
+                    }
+                  })
+                }
+
+
+                console.log(traces)
+
+                var layout = {
+                  // title: 'Colored Bar Chart',
+                  barmode: 'stack',
+                  autosize: false,
+                  width: 1060,
+                  height: 400,
+                  margin: {
+                    l: 250,
+                    r: 50,
+                    b: 50,
+                    t: 100,
+                    pad: 4
+                  },
+                  legend: {
+                    // y: 0.98,
+                    y: 1,
+                    yref: 'paper',
+                    yanchor: 'bottom',
+                    // title: {
+                    //   text: 'species: '
+                    // },
+                    // bordercolor: 'black',
+                    // borderwidth: 1.5,
+                    orientation: "h",
+                  },
+                };
+
+                myDiv.fn = `stackedbarchartunipepts11fromupset`
+                Plotly.newPlot('myDiv', traces, layout);
+              } catch (error) {
+                console.error('Error fetching CSV:', error);
+              }
+            }
+
+            document.getElementById('taxonomic_level').addEventListener('input', handleInputChange);
+
+        </script>
+
+      </body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      .tooltip-item {
+        display: flex;
+        align-items: center;
+        margin-top: 5px;
+      }
+
+      .tooltip-color {
+        width: 8px;
+        height: 8px;
+        margin-right: 5px;
+      }
+
+      .tooltip {
+        position: absolute;
+        background-color: rgb(186, 34, 34);
+        border: 1px solid #ccc;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        font-size: 12px;
+        color: #333;
+        visibility: hidden;
+      }
+    </style>
+
+    <title>CAMPI3 datavisualisatie</title>
+
+    <script type="text/javascript" src="./d3.v5.js"></script>
+    <link rel="stylesheet" href="jl.css">
+    <link href="./node_modules/nouislider/dist/nouislider.css" rel="stylesheet">
+    <script src="./node_modules/nouislider/dist/nouislider.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js" charset="utf-8"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+
+  </head>
+
+  <body>
+    <header>
+      <a href="#"><img src="" alt="" width="20%" height="90" id="Insert_logo" style="background-color: #C6D580; display:block;" /></a>
+    </header>
+
+    <div class="container">
+      <div class="sidebar1">
+        <ul class="nav">
+          <li><a href="./index.html">Infopagina</a></li>
+          <li><a href="./upset.html">UpSet plots</a></li>
+          <li><a href="./barplot_nr_of_mpsms.html">Barplots # mPSMs</a></li>
+          <li><a href="./compare_msamanda.html">Comparison MSAmanda</a></li>
+          <li><a href="./compare_ms2rescore.html">Comparison MS²Rescore</a></li>
+          <li><a href="./tda.html">TDA: Histogram & PP plots</a></li>
+          <!-- <li><a href="./histogram.html">TDA: distributies</a></li>   
+          <li><a href="./pp_plots.html">TDA: PP plots</a></li> -->
+          <!-- <li><a href="./taxonomic_distribution.html">Taxonomic distribution</a></li>
+          <li><a href="./sample_composition_charts_v3.html">sample composition</a></li>             
+          <li><a href="#">MS²Rescore fts PCA</a></li>
+          <li><a href="#">MS²Rescore fts boxplots</a></li> -->
+        </ul>
+        <aside>
+          <p> The above links demonstrate a basic navigational structure using an unordered list styled with CSS. Use this as a starting point and modify the properties to produce your own unique look. If you require flyout menus, create your own using a Spry menu, a menu widget from Adobe's Exchange or a variety of other javascript or CSS solutions.</p>
+          <p>If you would like the navigation along the top, simply move the ul to the top of the page and recreate the styling.</p>
+        </aside>
+      </div>
+
+      <article class="content">
+  
+        <section>
+          <h2>Grouped bar chart</h2>
+
+          <form>
+            <div style="padding-left: 20px;">
+
+              <label aria-label="depth input">
+                search depth: &nbsp;
+                <select name="depth" id="depth">
+                  <option value='first'>first</option>
+                  <option value='second'>second</option>
+                  <option value='all'>both</option>
+                </select>
+                <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+              </label>
+            
+              <label aria-label="criterium input">
+                y-axis: &nbsp;
+                <select name="yaxis" id="criterium">
+                  <option value="scans">scans</option>
+                  <option value="PSMs">PSMs</option>
+                  <option value="peptidoforms">peptidoforms</option>
+                  <option value="peptides">peptides</option>
+                </select>
+                <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+              </label>
+            
+              <label aria-label="threshold input">
+                q-value cut-off: &nbsp;
+                <select name="threshold" id="threshold">
+                  <option value="0.001">0.1 %</option>
+                  <option value="0.01" selected="selected">1 %</option>
+                  <option value="0.05">5 %</option>
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </label>
+
+
+              <label aria-label="method input">
+                method: &nbsp;
+                <select name="method" id="method">
+                  <option value="old" selected="selected">old</option>
+                  <option value="new">new</option>
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </label>
+            </div>         
+          </form>
+
+          <div id='myDiv'></div>
+          
+          <script>
+            async function fetchCSV(url) {
+              const response = await fetch(url);
+              const text = await response.text();
+              return text;
+            }
+          
+            let depthValue = document.getElementById('depth').value;
+            let countValue = document.getElementById('criterium').value;
+            let thresholdValue = document.getElementById('threshold').value;
+            let methodValue = document.getElementById('method').value;
+
+
+            async function handleInputChange(event) {
+              const inputElement = event.target;
+              const inputValue = inputElement.value;
+          
+              switch (inputElement.id) {
+                case 'depth':
+                  depthValue = inputValue;
+                  break;
+                case 'criterium':
+                  countValue = `${inputValue}`;
+                  break;
+                case 'threshold':
+                  thresholdValue = inputValue;
+                  break;
+                case 'method': 
+                  methodValue = inputValue;
+                  break;
+              }
+    
+              console.log('depth:', depthValue, 'criterium:', countValue, 'threshold:', thresholdValue, 'method: ', methodValue);
+
+        
+          
+              try {
+
+                const csvData = await fetchCSV(`./data/comparems2rescore/grouped_results_ms2rescore_${methodValue}.tsv`);
+          
+                // Parse the main CSV data
+                const rows = csvData.trim().split('\n').map(row => row.split('\t'));
+                const headers = rows[0];
+                const data = rows.slice(1).map(row => {
+                  const obj = {};
+                  headers.forEach((header, i) => {
+                    obj[header] = row[i];
+                  });
+                  return obj;
+                });
+
+                // console.log(data);
+
+                const filteredData = data
+                  .filter((d) => d.threshold == thresholdValue)
+                  .filter((d) => d.chart == depthValue)
+                  .filter((d) => d.criterium == countValue);
+
+                console.log(filteredData);
+
+                function stringToNumericList(listAsString) {
+
+                  const listOfNumericValues = listAsString
+                    .substr(1, listAsString.length -2)
+                    .split(', ')
+                    .map((d) => Number(d));
+                  return listOfNumericValues
+                };
+
+                function stringToListWStrings(listAsString) {
+
+                  const listOfStrings = listAsString
+                    .substr(1, listAsString.length -2)
+                    .split(', ')
+                    .map((d) => d.substr(1, d.length-2));
+                  return listOfStrings
+                  };
+
+                sepData = filteredData.filter((d) => d.training == 'separate')[0];
+                togetherData = filteredData.filter((d) => d.training == 'together')[0];
+
+
+                var ySeparate = stringToNumericList(sepData.counts);
+                var xSeparate = stringToListWStrings(sepData.samples);
+                var yTogether = stringToNumericList(togetherData.counts);
+                var xTogether = stringToListWStrings(togetherData.samples);            
+                
+                console.log(ySeparate, yTogether, xSeparate, xTogether);
+
+                var trace1 = {
+                  x: xTogether,
+                  y: yTogether,
+                  name: 'together',
+                  legendgroup: 'leftLegend',
+                  type: 'bar',                  
+                  marker: {
+                    color: '#6996c6',
+                    line: {
+                      color: '#4e79a7',
+                      width: 1.5
+                    }
+                  }
+                };
+
+                var trace2 = {
+                  x: xSeparate,
+                  y: ySeparate,
+                  name: 'separate',
+                  legendgroup: 'rightLegend',
+                  type: 'bar',
+                  marker: {
+                    color: '#f9a34d',
+                    line: {
+                      color: '#f28e2c',
+                      width: 1.5
+                    }
+                  }
+                };
+
+                var offsetArrows = Math.max(
+                  stringToNumericList(sepData.counts).sort((a,b) => b-a)[0],
+                  stringToNumericList(togetherData.counts).sort((a,b) => b-a)[0]
+                ) * 0.08
+
+                console.log(offsetArrows);
+                var arrows = [];
+                var percentagesDelta = [];
+                var annotationsText = [];
+                // var annotationsText = ['-10%', '+10%', '+5%', '-5%', '-10%', '+5%', '-10%', '+10%']; // Sample text annotations
+                function getDeltaPc(xOld, xNew) {
+                    return ((xNew - xOld)/xOld)*100;
+                }
+
+                // Loop to create shapes and annotations
+                for (var i = 0; i < xTogether.length; i++) {
+                    // console.log(yTogether[i],ySeparate[i])
+                    var sign = ySeparate[i] >= yTogether[i] ? '+' : '';
+                    annotationsText.push(`${sign}${(getDeltaPc(yTogether[i],ySeparate[i])).toFixed(2)}%`)
+
+                    arrows.push({
+                        type: 'line',
+                        x0: i -0.2,                                              
+                        x1: i + 0.2,    
+                        y0: Math.max(yTogether[i],ySeparate[i]) + offsetArrows,
+                        y1: Math.max(yTogether[i],ySeparate[i]) + offsetArrows,
+                        line: {
+                            color: ySeparate[i] >= yTogether[i] ? 'rgb(10,180,10)' : 'rgb(255, 0, 0)', // Green for positive change, red for negative
+                            width: 1,
+                            dash: 'solid'
+                        }
+                      },
+                      {
+                        type: 'line',
+                        x0: i -0.2,                                              
+                        x1: i - 0.2,    
+                        y0: Math.max(yTogether[i],ySeparate[i]) + (offsetArrows * 0.3),
+                        y1: Math.max(yTogether[i],ySeparate[i]) + offsetArrows,
+                        line: {
+                          color: ySeparate[i] >= yTogether[i] ? 'rgb(10,180,10)' : 'rgb(255, 0, 0)', // Green for positive change, red for negative
+                          width: 1,
+                          dash: 'solid'
+                        }
+                      },
+                      {
+                        type: 'line',
+                        x0: i + 0.2,                                              
+                        x1: i + 0.2,    
+                        y0: Math.max(yTogether[i],ySeparate[i]) + (offsetArrows * 0.3),
+                        y1: Math.max(yTogether[i],ySeparate[i]) + offsetArrows,
+                        line: {
+                          color: ySeparate[i] >= yTogether[i] ? 'rgb(10,180,10)' : 'rgb(255, 0, 0)', // Green for positive change, red for negative
+                          width: 1,
+                          dash: 'solid'
+                        }
+                      },
+                      {
+                        type: 'line',
+                        x0: i + 0.2,                                              
+                        x1: i + 0.25,    
+                        y0: Math.max(yTogether[i],ySeparate[i]) + (offsetArrows * 0.3),
+                        y1: Math.max(yTogether[i],ySeparate[i]) + (offsetArrows * 0.5),
+                        line: {
+                          color: ySeparate[i] >= yTogether[i] ? 'rgb(10,180,10)' : 'rgb(255, 0, 0)', // Green for positive change, red for negative
+                          width: 1,
+                          dash: 'solid'
+                        }
+                      },
+                      {
+                        type: 'line',
+                        x0: i + 0.2,                                              
+                        x1: i + 0.15,    
+                        y0: Math.max(yTogether[i],ySeparate[i]) + (offsetArrows * 0.3),
+                        y1: Math.max(yTogether[i],ySeparate[i]) +(offsetArrows * 0.5),
+                        line: {
+                          color: ySeparate[i] >= yTogether[i] ? 'rgb(10,180,10)' : 'rgb(255, 0, 0)', // Green for positive change, red for negative
+                          width: 1,
+                          dash: 'solid'
+                        }
+                      }
+                    );
+
+                    percentagesDelta.push({
+                        x: i,
+                        y: Math.max(yTogether[i],ySeparate[i]) + (offsetArrows *1.5),
+                        xref: 'x',
+                        yref: 'y',
+                        text: annotationsText[i],
+                        showarrow: false,
+                        font: {
+                            color: ySeparate[i] >= yTogether[i] ? 'rgb(10,180,10)' : 'rgb(255, 0, 0)' // Green for positive change, red for negative
+                        }
+                    });
+                }
+
+                let yAxisLabel = '';
+
+
+
+                if (countValue !== 'PSMs') {
+                  yAxisLabel = `${countValue}`
+                } else {if (depthValue == 'first') {
+                  yAxisLabel = `first search PSMs` 
+                } else {
+                  if (depthValue =='second') {
+                    yAxisLabel = 'second search mPSMs'
+                  } else {
+                    yAxisLabel = 'all mPSMs'
+                  }
+                }}
+
+                var layout = {
+                  barmode: 'group',
+                  bargap: 0.15,
+                  bargroupgap: 0.1,
+                  showlegend: true,
+                  legend: {
+                    title: {
+                      text: 'Rescoring: '
+                    },
+                    // x: 0.01,
+                    // xanchor: 'left',
+                    // y: 0.98,
+                    y: 0.5,
+
+                    // bordercolor: 'black',
+                    // borderwidth: 1.5,
+                    // orientation: "h",
+                  },
+                  autosize: false,
+                  width: 760,
+                  height: 500,
+                  margin: {
+                    l: 80,
+                    r: 50,
+                    b: 100,
+                    t: 80,
+                    pad: 4
+                  },
+                  title: {
+                    text: `Number of identified ${countValue} (${depthValue}) at ${thresholdValue*100}% FDR`,
+                    font: {
+                      family: 'Arial, sans-serif',
+                      size: 24,
+                      color: 'darkgrey',                
+                  }},
+                  yaxis: {
+                    title: yAxisLabel,
+                    // title: '$\sqrt{(n_\text{c}(t|{T_\text{early}}))}$', 
+                    titlefont: {
+                      family: 'Arial, sans-serif',
+                      size: 16,
+                      color: 'black'
+                    },
+                    nticks: 6,
+                  },   
+                  shapes: arrows,
+                  annotations: percentagesDelta,
+                  };
+
+                
+                myDiv.fn = `ms2rescore_compare_${countValue} ${depthValue} ${thresholdValue}`;
+                Plotly.newPlot('myDiv', [trace1, trace2], layout);
+              } catch (error) {
+                console.error('Error fetching CSV:', error);
+              }
+            }
+       
+            // Add event listeners to each input box
+            document.getElementById('depth').addEventListener('input', handleInputChange);
+            document.getElementById('criterium').addEventListener('input', handleInputChange);
+            document.getElementById('threshold').addEventListener('input', handleInputChange);
+            document.getElementById('method').addEventListener('input', handleInputChange);
+          </script>
+          
+
+        </section>
+
+
+        <section>
+          <h2>Logo Replacement</h2>
+        </section>
+      </article>
+
+
+      <aside>
+        <h4>Backgrounds</h4>
+        <p>By nature, the background color on any block element will only show for the length of the content. If you'd like a dividing line instead of a color, place a border on the side of the .content block (but only if it will always contain more content).</p>
+      </aside>
+
+      <footer>
+        <p> </p>
+        <address>
+            
+        </address>
+      </footer>
+    </div>
+  </body>
+</html>
