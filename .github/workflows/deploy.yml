@@ -27,7 +27,6 @@ jobs:
         with:
           node-version: 20
       - run: npm install
-      - run: node docs/data/allFilteredData.js
       - run: npm run build:mem:linux
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
