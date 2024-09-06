@@ -1,0 +1,55 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+      id-token: write
+      packages: read
+    steps:
+      - uses: actions/checkout@v4
+
+      # Optionally set up Node.js if you have any Node.js-based build steps
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Install dependencies if necessary (optional, only if you have package.json)
+      - run: npm install
+      
+      # Run build commands if necessary (optional, only if you have build steps)
+      # Replace the following command with your actual build command
+      - run: npm run build # or any other build script you have
+
+      # Upload the build artifacts (in this case, your static HTML files)
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload the directory containing your HTML files
+          path: './dist' # Make sure this points to the directory with your HTML files
+      - run: ls
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - run: ls
+
+      # Deploy the static site to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
