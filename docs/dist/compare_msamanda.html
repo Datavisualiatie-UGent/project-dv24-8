@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>comparison MSAmanda results | Metaproteomics visualisation</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight,alt,wide.07c19a37.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight,alt,wide.07c19a37.css">
+<link rel="modulepreload" href="./_observablehq/client.512a2fcc.js">
+<link rel="modulepreload" href="./_observablehq/runtime.56d81cb2.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.831f6193.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
+<link rel="icon" href="./_file/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import {define} from "./_observablehq/client.512a2fcc.js";
+import {registerFile} from "./_observablehq/stdlib.831f6193.js";
+
+registerFile("./data/compare_msamanda.tsv", {"name":"./data/compare_msamanda.tsv","mimeType":"text/tab-separated-values","path":"./_file/data/compare_msamanda.d21a3761.tsv","lastModified":1725586117005});
+registerFile("./data/compare_msamanda_nofilter.tsv", {"name":"./data/compare_msamanda_nofilter.tsv","mimeType":"text/tab-separated-values","path":"./_file/data/compare_msamanda_nofilter.1b805c2f.tsv","lastModified":1725586131698});
+
+define({id: "1ce88c8a", inputs: ["FileAttachment"], outputs: ["dataFiltered","dataUnfiltered"], body: (FileAttachment) => {
+const dataFiltered = FileAttachment("./data/compare_msamanda.tsv").tsv({typed: true});
+const dataUnfiltered = FileAttachment("./data/compare_msamanda_nofilter.tsv").tsv({typed: true});
+return {dataFiltered,dataUnfiltered};
+}});
+
+define({id: "1916f5b9", outputs: ["stringToNumericList","stringToListWStrings","fetchCSV"], body: () => {
+function stringToNumericList(listAsString) {
+  const listOfNumericValues = listAsString
+    .substr(1, listAsString.length -2)
+    .split(', ')
+    .map((d) => Number(d));
+  return listOfNumericValues
+};
+
+function stringToListWStrings(listAsString) {
+  const listOfStrings = listAsString
+    .substr(1, listAsString.length -2)
+    .split(', ')
+    .map((d) => d.substr(1, d.length-2));
+  return listOfStrings
+  };
+async function fetchCSV(url) {
+  const response = await fetch(url);
+  const text = await response.text();
+  return text;
+}
+return {stringToNumericList,stringToListWStrings,fetchCSV};
+}});
+
+define({id: "2d2453e3", inputs: ["dataFiltered","dataUnfiltered","stringToListWStrings","stringToNumericList","msamandaDiv","Plotly"], outputs: ["countValue","thresholdValue","handleInputChange"], body: (dataFiltered,dataUnfiltered,stringToListWStrings,stringToNumericList,msamandaDiv,Plotly) => {
+let countValue = document.getElementById('criterium').value;
+let thresholdValue = document.getElementById('threshold').value;
+
+async function handleInputChange(event) {
+  const inputElement = event.target;
+  const inputValue = inputElement.value;
+
+  switch (inputElement.id) {
+    case 'criterium':
+      countValue = inputValue;
+      break;
+    case 'threshold':
+      thresholdValue = inputValue;
+      break;
+  }
+
+  console.log('criterium:', countValue);
+  console.log('threshold:', thresholdValue);
+
+
+  console.log(dataFiltered)
+  console.log(thresholdValue != 1 ? dataUnfiltered : dataFiltered)
+
+
+  const filteredData = (thresholdValue == 1 ? dataUnfiltered : dataFiltered)
+    .filter(d => d.threshold == thresholdValue)
+    .filter(d => d.criterium == countValue)
+    .map(d => ({
+      ...d,
+      samples: stringToListWStrings(d.samples),
+      counts: stringToNumericList(d.counts)
+    }));
+
+  console.log(filteredData)
+  const colorScheme = ["#fc8d62","#ffd92f","#a6d854","#66c2a5","#8da0cb","#e78ac3"]
+  const colorSchemeBorder = ["#e27043","#e0c23b","#97c64d","#5aab91","#798ab1","#d27cb1"]
+
+  const methods = [
+    { method: 'first', name: '0', color: colorScheme[0], lineColor: colorSchemeBorder[0], order: 1 },
+    { method: 'MaxPrec1', name: '1', color: colorScheme[1], lineColor: colorSchemeBorder[1], order: 2 },
+    { method: 'MaxPrec2', name: '2', color: colorScheme[2], lineColor: colorSchemeBorder[2], order: 3 },
+    { method: 'MaxPrec3', name: '3', color: colorScheme[3], lineColor: colorSchemeBorder[3], order: 4 },
+    { method: 'MaxPrec4', name: '4', color: colorScheme[4], lineColor: colorSchemeBorder[4], order: 5 },
+    { method: 'MaxPrec5', name: '5', color: colorScheme[5], lineColor: colorSchemeBorder[5], order: 6 },
+  ];
+
+  var y1Data = {}, xData = {}, traces = [];
+
+  methods.forEach(m => {
+    const chartData = filteredData.find(d => d.method == m.method);
+    y1Data[m.method] = chartData.counts;
+    xData[m.method] = chartData.samples;
+
+    // Create trace for the bar chart
+    traces.push({
+      x: xData[m.method],
+      y: y1Data[m.method],
+      name: m.name,
+      type: 'bar',
+      marker: {
+        color: m.color,
+        line: {
+          color: m.lineColor,
+          width: 1.5
+        }
+      }
+    });
+  });
+
+  const layout = {
+    barmode: 'group',
+    bargap: 0.15,
+    bargroupgap: 0.2,
+    showlegend: true,
+    // autosize: false,
+    // width: 760,
+    // height: 500,  
+    legend: {
+      title: {text: 'Max. number of allowed precursors'},
+      y: -0.2,
+      orientation: 'h',
+    //   bordercolor: 'black',
+    //   borderwidth: 1.5,
+    },
+    yaxis: {
+      title: {
+        text: `number of ${countValue}`,
+        // text: `number of target PSMs`,
+        standoff: 20,
+        },                      
+      // titlefont: {
+      //     family: 'Arial, sans-serif',
+      //     size: 18,
+      //     color: 'grey'
+      //     },
+      // dtick: 25000,
+      tick0: 0,
+    },
+    title: {
+      text: `Number of identified ${countValue} (${thresholdValue*100}% FDR)`,
+      // text: `number of target PSMs`,
+      font: {
+          family: 'Arial, sans-serif',
+          size: 20,
+          color: 'darkgrey',                
+          },
+      x: 0.5,
+      y: 5,
+      xref: 'paper',
+      yref: 'paper',
+      xanchor: 'center',
+      yanchor: 'top',
+    },                
+    margin: {
+      l: 100,
+      r: 50,
+      b: 100,
+      t: 80,
+      pad: 4
+    },
+  };
+  msamandaDiv.fn = `compare_msamanda_${countValue}_${thresholdValue}`
+  Plotly.newPlot('msamandaDiv', traces, layout);
+}
+
+// Add event listeners for input elements
+document.getElementById('criterium').addEventListener('input', handleInputChange);
+document.getElementById('threshold').addEventListener('input', handleInputChange);
+return {countValue,thresholdValue,handleInputChange};
+}});
+
+</script>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Metaproteomics visualisation</a></li>
+  </ol>
+  <div id="observablehq-search"><input type="search" placeholder="Search"></div>
+  <div id="observablehq-search-results"></div>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("./_observablehq/search.6cd2e105.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <section class="observablehq-section-active">
+    <summary>Results</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./barplot_psms">barplot psms</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./compare_msamanda">MSAmanda</a></li>
+    <li class="observablehq-link"><a href="./compare_ms2rescore">MS²Rescore</a></li>
+    <li class="observablehq-link"><a href="./upset">UpSet plots</a></li>
+    <li class="observablehq-link"><a href="./tda">TDA</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<h1 id="comparison-ms-amanda-pipelines" tabindex="-1"><a class="observablehq-header-anchor" href="#comparison-ms-amanda-pipelines">Comparison MSAmanda pipelines</a></h1>
+<!-- Load and transform the data -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+function stringToNumericList(listAsString) {
+  return listAsString
+    .slice(1, -1)
+    .split(', ')
+    .map(Number);
+}
+// Convert a string representation of a list of strings to an actual list of strings
+function stringToListWStrings(listAsString) {
+  return listAsString
+    .slice(1, -1)
+    .split(', ')
+    .map(d => d.slice(1, -1));
+}
+</script>
+<!-- Cards with big numbers -->
+<div class="grid grid-cols-4">
+  <div class="card">
+    <h2>y-axis <span class="muted">/ Criterium</span></h2>
+    <span class="big">
+      <select name="yaxis" id="criterium">
+        <option value="scans">scans</option>
+        <option value="PSMs">PSMs</option>
+        <option value="peptides">peptides</option>
+        <option value="peptidoforms">peptidoforms</option>        
+      </select>
+    </span>
+  </div>
+  <div class="card">
+    <h2>FDR threshold</h2>
+    <span class="big">      
+      <select name="threshold" id="threshold">
+        <option value="0.001">0.1 %</option>
+        <option value="0.01" selected="selected">1 %</option>
+        <option value="0.05">5 %</option>
+        <option value="1">none</option>
+      </select>
+    </span>
+  </div>
+</div>
+<div class="grid grid-cols-2">
+  <div id="msamandaDiv" class="card"></div>
+</div>
+<div class="observablehq observablehq--block"><!--:1ce88c8a:--></div>
+<div class="observablehq observablehq--block"><!--:1916f5b9:--></div>
+<div class="observablehq observablehq--block"><!--:2d2453e3:--></div>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./barplot_psms"><span>barplot psms</span></a><a rel="next" href="./compare_ms2rescore"><span>MS²Rescore</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-09-06T15:16:10">Sep 6, 2024</a>.</div>
+</footer>
+</div>

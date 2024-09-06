@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>comparison MS²Rescore results | Metaproteomics visualisation</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight,alt,wide.07c19a37.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight,alt,wide.07c19a37.css">
+<link rel="modulepreload" href="./_observablehq/client.512a2fcc.js">
+<link rel="modulepreload" href="./_observablehq/runtime.56d81cb2.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.831f6193.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
+<link rel="icon" href="./_file/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import {define} from "./_observablehq/client.512a2fcc.js";
+import {registerFile} from "./_observablehq/stdlib.831f6193.js";
+
+registerFile("./data/barplot_nr_of_mpsms.tsv", {"name":"./data/barplot_nr_of_mpsms.tsv","mimeType":"text/tab-separated-values","path":"./_file/data/barplot_nr_of_mpsms.61ab21ef.tsv","lastModified":1725587609850});
+
+define({id: "d5f8adaa", inputs: ["FileAttachment"], outputs: ["data"], body: (FileAttachment) => {
+const data = FileAttachment("./data/barplot_nr_of_mpsms.tsv").tsv({typed: true});
+return {data};
+}});
+
+define({id: "1e93a2dd", outputs: ["stringToNumericList","stringToListWStrings"], body: () => {
+function stringToNumericList(listAsString) {
+  const listOfNumericValues = listAsString
+    .substr(1, listAsString.length -2)
+    .split(', ')
+    .map((d) => Number(d));
+  return listOfNumericValues
+};
+
+function stringToListWStrings(listAsString) {
+  const listOfStrings = listAsString
+    .substr(1, listAsString.length -2)
+    .split(', ')
+    .map((d) => d.substr(1, d.length-2));
+  return listOfStrings
+  };
+
+return {stringToNumericList,stringToListWStrings};
+}});
+
+define({id: "b90d4f70", inputs: ["data","DivBarplot","Plotly"], outputs: ["thresholdValue","methodValue","versionValue","scoringValue","handleInputChange"], body: (data,DivBarplot,Plotly) => {
+let thresholdValue = document.getElementById('threshold').value;
+let methodValue = document.getElementById('method').value;
+let versionValue = document.getElementById('version').value;
+let scoringValue = document.getElementById('scoringMethod').value;
+
+
+// Event listener for input change
+async function handleInputChange(event) {
+  const inputElement = event.target;
+  const inputValue = inputElement.value;
+
+  switch (inputElement.id) {
+    case 'threshold':
+      thresholdValue = inputValue;
+      break;
+    case 'method':
+      methodValue = inputValue;
+      break;
+    case 'scoringMethod':
+      scoringValue = inputValue;
+      break;
+    case 'version':
+      versionValue = inputValue;
+      break;
+  }
+
+  console.log('threshold:', thresholdValue);
+  console.log('method: ', methodValue);
+  console.log('version: ', versionValue);
+  console.log('scoring: ', scoringValue);
+
+
+  var filteredData = data
+    // .filter(d => d.sample == sampleValue)
+    .filter(d => d.threshold == thresholdValue)
+    .filter(d => d.version == versionValue)
+    .filter(d => d.scoring == scoringValue)
+    .filter(d => d.method == methodValue)
+    .sort((a, b) => b[2]-a[2]);
+
+  console.log(filteredData)
+
+  let samples = [];
+
+  filteredData.forEach((d) => {
+    samples.push(d.sample)
+  })
+  samples = ['S03','S05','S07','S08','S11','F01','F06','F07'];
+                
+  const colors = ['red','darkorange','gold','limegreen','aquamarine','cornflowerblue', 'mediumpurple', 'hotpink']
+  const colorsBorders = ['crimson','chocolate','goldenrod','darkgreen','mediumspringgreen','blue', 'indigo', 'mediumvioletred']
+
+  let sampleData = [], traces = [], labelsBars = []
+
+  for (let i=0; i < samples.length; i++) {
+    var sample = samples[i]
+    sampleData = filteredData.filter(d => d.sample == sample)
+
+    let xValues = [], yValues = []
+
+
+    for (let j = 2; j < 7; j++) {
+      xValues.push(`${j}`);
+      yValues.push(Number(sampleData[0][j]))
+
+      let pc = Number(sampleData[0][j])/sampleData[0]['total']*100;
+
+      pc = (pc < 1 && pc != 0) ?  `< 1` : `${Math.round(pc*10)/10}`  
+
+      labelsBars.push({
+        x: j - 0.38 + i*0.106,
+        y: Number(sampleData[0][j])+300,
+        text: `${Number(sampleData[0][j])} (${pc}%)`,
+        xanchor: 'center',
+        yanchor: 'bottom',
+        textangle: -90,
+        showarrow: false,
+        font: {
+              color: colorsBorders[i]
+          }
+      })
+    };
+    traces.push({
+      x: xValues,
+      y: yValues,
+      name: sample, 
+      type: 'bar',
+      marker: {
+      color: colors[i],
+      line: {
+        color: colorsBorders[i],
+        width: 1.5
+      }
+    }
+    })
+    console.log(sample, yValues)
+  }
+
+  const layout = {
+    autosize: false,
+    // width: 860,
+    width: 1060,
+    height: 500,
+    margin: {
+      l: 50,
+      r: 50,
+      b: 100,
+      t: 150,
+      pad: 4
+    },
+
+    barmode: 'group',
+    bargap: 0.15,
+    bargroupgap: 0.2,
+
+    
+    
+    xaxis: {
+      range: [1.5,5.5],
+      title: `Number of identified peptides in one MS2 spectrum (${thresholdValue*100}% FDR)`,
+      tickvalues: [2, 3, 4, 5],
+      tickangle: -90,
+                      
+    },
+
+    yaxis: {
+      // showticklabels: false,
+      title: '# MS2 spectra',
+      tickangle: -90,
+      side: 'right'
+      
+    },
+    // showlegend: false,
+    showlegend: true,
+
+    legend: {
+      x: 1,
+      xanchor: 'right',
+      y: 1.01,
+      bordercolor: 'black',
+      borderwidth: 1.5,
+    },
+
+    annotations: labelsBars,
+
+    // title: {
+    //   text: `Number of MS2 spectra with mPSMs`,
+    //   font: {
+    //       // family: 'Arial, sans-serif',
+    //       size: 20,
+    //       color: 'darkgrey',                
+    //       },
+    //   x: 0.5,
+    //   y: 5,
+    //   xref: 'paper',
+    //   yref: 'paper',
+    //   xanchor: 'center',
+    //   yanchor: 'top',
+    // },  
+  }
+
+
+  DivBarplot.fn = `mPSMs_per_scan_${scoringValue}_${methodValue}_${versionValue}`
+  Plotly.newPlot('DivBarplot', traces, layout);
+}
+
+// Add event listeners for input elements
+document.getElementById('threshold').addEventListener('input', handleInputChange);
+document.getElementById('method').addEventListener('input', handleInputChange);
+document.getElementById('version').addEventListener('input', handleInputChange);
+document.getElementById('scoringMethod').addEventListener('input', handleInputChange);
+return {thresholdValue,methodValue,versionValue,scoringValue,handleInputChange};
+}});
+
+</script>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Metaproteomics visualisation</a></li>
+  </ol>
+  <div id="observablehq-search"><input type="search" placeholder="Search"></div>
+  <div id="observablehq-search-results"></div>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("./_observablehq/search.6cd2e105.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <section class="observablehq-section-active">
+    <summary>Results</summary>
+    <ol>
+    <li class="observablehq-link observablehq-link-active"><a href="./barplot_psms">barplot psms</a></li>
+    <li class="observablehq-link"><a href="./compare_msamanda">MSAmanda</a></li>
+    <li class="observablehq-link"><a href="./compare_ms2rescore">MS²Rescore</a></li>
+    <li class="observablehq-link"><a href="./upset">UpSet plots</a></li>
+    <li class="observablehq-link"><a href="./tda">TDA</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<h1 id="comparison-number-of-identified-psms" tabindex="-1"><a class="observablehq-header-anchor" href="#comparison-number-of-identified-psms">Comparison number of identified PSMs</a></h1>
+<!-- Cards with big numbers -->
+<div class="grid grid-cols-4" style="width: 80%">
+  <div class="card">
+    <h2>FDR threshold</h2>
+    <span class="big">      
+      <select name="threshold" id="threshold">
+        <option value="0.001">0.1 %</option>
+        <option value="0.01" selected="selected">1 %</option>
+        <option value="0.05">5 %</option>
+        <option value="1.0">None</option>
+      </select>
+    </span>
+  </div>
+  <div class="card">
+    <h2>Version</h2>
+    <span class="big">
+      <select id="version">
+        <option value="default" selected="selected">start</option> 
+        <option value="final">adapted</option>
+      </select>
+    </span>
+  </div>
+  <div class="card">
+    <h2>scoring method</h2>
+    <span class="big">
+      <select name="scoring" id="scoringMethod">
+        <option value="msamanda">MSAmanda</option> 
+        <option value="ms2rescore" selected="selected">MS²Rescore</option>
+      </select>
+    </span>
+  </div>
+  <div class="card">
+    <h2>Method</h2>
+    <span class="big">
+      <select name="method" id="method">
+        <option value="first">first</option>
+        <option value="MaxPrec1">max 1 prec</option>              
+        <option value="MaxPrec2">max 2 prec</option>
+        <option value="MaxPrec3">max 3 prec</option>
+        <option value="MaxPrec4">max 4 prec</option>
+        <option value="MaxPrec5">max 5 prec</option>
+        <option value="all" selected="selected">all</option>
+        <option value="second">second (ms2rescore)</option>
+        <option value="merged">merged (ms2rescore)</option>
+      </select>
+    </span>
+  </div>
+</div>
+<div class="grid grid-cols-1" style="width: 80%">
+  <div id="DivBarplot" class="card"></div>
+</div>
+<div class="observablehq observablehq--block"><!--:d5f8adaa:--></div>
+<div class="observablehq observablehq--block"><!--:1e93a2dd:--></div>
+<div class="observablehq observablehq--block"><!--:b90d4f70:--></div>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./"><span>Metaproteomics visualisation</span></a><a rel="next" href="./compare_msamanda"><span>MSAmanda</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-09-06T15:16:10">Sep 6, 2024</a>.</div>
+</footer>
+</div>
