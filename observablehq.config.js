@@ -23,7 +23,6 @@ export default {
   head: '<link rel="icon" href="observable.png" type="image/png" sizes="32x32">',
 
   // The path to the source root.
-  root: "src",
 
   // Some additional configuration options and their defaults:
   // theme: "default", // try "light", "dark", "slate", etc.
